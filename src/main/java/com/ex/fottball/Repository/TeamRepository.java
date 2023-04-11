@@ -120,6 +120,19 @@ public class TeamRepository implements TeamRepositoryI{
     }
 
     @Async
+    public void deleteCardFromTeam(Integer team_id, Integer card_id)throws IOException{
+        Team team = findTeamById(team_id);
+        List<Integer> cardId = team.getCards();
+        for( int i=0; i<cardId.size(); i++){
+            if(cardId.get(i) == card_id) {
+                cardId.remove(i);
+            }
+        }
+        team.setCards(cardId);
+        update(team);
+    }
+
+    @Async
     public List<Team> getTeams () {
            try{
                return objectMapper.readValue(new File(fileP), new TypeReference<>() {

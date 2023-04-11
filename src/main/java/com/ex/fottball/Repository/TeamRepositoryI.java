@@ -17,5 +17,6 @@ public interface TeamRepositoryI {
 
     public List<Team> getTeams() ;
     public void createTeam(Team team) ;
+    public void deleteCardFromTeam(Integer team_id, Integer card_id)throws IOException;
 
 }

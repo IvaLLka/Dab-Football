@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../css/style.css">
+  <meta charset="UTF-8">
+  <title>Create-team</title>
+</head>
+<body>
+<header class="head">
+  <div class="container">
+    <div class="header-body">
+      <div class="logo"><a class="link" href="/index">Dab Football</a></div>
+      <div class="links">
+        <div class="head-element"><a class="link" href="/cards">Игроки</a></div>
+        <div class="head-element"><a class="link" href="/teams">Команды</a></div>
+      </div>
+    </div>
+  </div>
+</header>
+<main  class="container" th:each="team:${teams}">
+  <form method="post" th:action="@{/teams/add-cards/{team_id} (team_id = ${team.getTeam_id()})}" class="modal" >
+    <div class="modal-cont">
+      <div class="modal-window">
+        <div class="item" >Добавление игроков</div>
+        <select class="input" name="cards" multiple>
+          <option>Выберите игрока</option>
+          <option th:each="card:${cards}" th:text="${card.getCard_id()}"></option>
+        </select>
+        <button class="submit" type="submit">Добавить</button>
+        <a class="submit" href="/teams">Отмена</a>
+      </div>
+    </div>
+  </form>
+</main>
+
+
+</body>
+</html>

@@ -10,6 +10,7 @@ import com.ex.fottball.Repository.CardRepositoryI;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TeamService {
@@ -63,6 +64,11 @@ public class TeamService {
         }
         return cards;
     }
+
+   @Async
+    public void deleteCardFromTeam(Integer team_id, Integer card_id)throws IOException{
+        teamRepository.deleteCardFromTeam(team_id, card_id);
+   }
 
 
 

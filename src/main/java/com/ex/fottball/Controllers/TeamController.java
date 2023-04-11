@@ -69,28 +69,6 @@ public class TeamController {
         return "team-edit";
     }
 
-    /*@RequestMapping("/teams")
-    public String getTeams(Model model) throws Exception {
-        // Создаем объект ObjectMapper с использованием фабрики YAML.
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-
-        // Читаем YAML-файл, содержащий список команд.
-        List<Team> teams = mapper.readValue(new File(fileP), new TypeReference<>() {});
-
-        // Создаем новый список команд, который будет содержать только те команды, которые принадлежат карточкам из списка cards.
-        List<Team> filteredTeams = new ArrayList<>();
-        List<Integer> cards = List.of(1, 2, 3); // список карточек
-        for (Team team : teams) {
-            if (team.getCards().stream().anyMatch(cards::contains)) {
-                filteredTeams.add(team);
-            }
-        }
-
-        // Используем объект ModelAndView для передачи списка отфильтрованных команд в представление JSP.
-        model.addAttribute("teams", filteredTeams);
-        return "teams";
-    }*/
-
     @Async
     @PostMapping("/teams/edit/{team_id}")
     public String editTeam(@ModelAttribute Team team){
@@ -98,11 +76,11 @@ public class TeamController {
         return "redirect:/teams";
     }
 
-    /*@GetMapping("/teams/delete-card/{card_id}")
-    public String deleteCardFromTeam(@PathVariable Integer card_id){
-        teamService.deleteTeam(card_id);
-        return "redirect:/teams";
-    }*/
+    @PostMapping("/teams/delete-card/{team_id}/{card_id}")
+    public String deleteCardFromTeam(@PathVariable Integer team_id, @PathVariable Integer card_id)throws IOException{
+        teamService.deleteCardFromTeam(team_id, card_id);
+        return "redirect:/teams/details/{team_id}";
+    }
     @Async
     @GetMapping("/teams/details/{team_id}")
     public String teamDetail(@PathVariable Integer team_id, Model model)throws IOException{
@@ -112,6 +90,15 @@ public class TeamController {
         model.addAttribute("teams", teamList);
         model.addAttribute("cards", cardList);
         return "team-detail";
+    }
+
+    @GetMapping("/teams/add-cards/{team_id}")
+    public String addCard(@PathVariable Integer team_id, Model model){
+        List<Card> cards = new ArrayList<>();
+        List<Card> teams = new ArrayList<>();
+        model.addAttribute("cards", cards);
+        model.addAttribute("teams", teams);
+        return "/add-cards";
     }
 
 

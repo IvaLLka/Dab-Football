@@ -1,12 +1,4 @@
 ---
-- team_id: 1
-  team_name: "LK"
-  trainer: "34"
-  team_dob: "0434-03-31"
-  num_players: 34
-  stadium: "st"
-  card: null
-  cards: null
 - team_id: 2
   team_name: "56"
   trainer: "565"
@@ -15,18 +7,15 @@
   stadium: "56"
   card: null
   cards:
-  - 2
-  - 3
   - 4
-- team_id: 4
-  team_name: "43"
-  trainer: "234"
-  team_dob: "0012-03-12"
-  num_players: 32143
-  stadium: "1234"
+- team_id: 5
+  team_name: "Спартак"
+  trainer: "Тренер"
+  team_dob: "0434-03-31"
+  num_players: 43
+  stadium: "Стадион"
   card: null
   cards:
   - 1
+  - 2
   - 3
-  - 4
-  - 5

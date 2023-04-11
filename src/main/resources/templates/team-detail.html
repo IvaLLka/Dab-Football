@@ -20,7 +20,7 @@
 <main class="container" th:each="team:${teams}">
     <div class="players" >
         <div class="main-title">Команда  <div th:text="${team.getTeam_name()}"></div>
-        <form method="post" th:action="'/teams/details/'+${team.getTeam_id}" class="card"  >
+        <div class="card">
             <img src="/img/img.jpeg" width="200px" height="200px">
             <div class="info">
                 <div class="grade" >Название: <div th:text="${team.getTeam_name()}"></div></div>
@@ -30,27 +30,30 @@
                 <div class="grade">Дата основания: <div th:text="${team.getTeam_dob()}"></div></div>
                  Игроки:
                  <div th:each="card:${cards}">
-                     <div class = "card">
-                         <img src="/img/img.jpeg" width="200px" height="200px">
-                         <div class="info">
-                             <div class="grade" >Полное имя: <div th:text="${card.getFull_name()}"></div></div>
-                             <div class="grade">Зар.плата: <div th:text="${card.getSalary()}"></div></div>
-                             <div class="grade" >Дата рождения: <div th:text="${card.getDob()}"></div></div>
-                             <div class="grade" >Стаж игры: <div th:text="${card.getPlay_exp()}"></div></div>
-                             <div class="grade" >Команда: <div th:text="${card.getTeam()}"></div></div>
-                             <div class="grade buttons">
-                                 <a class="button red" th:href="@{/teams/del-cardFromTeam/{card_id} (card_id =${team.card})}">Удалить</a>
-                             </div>
+                     <form method="post" th:action="'/teams/delete-card/' + ${team.getTeam_id()}+ '/' + ${card.getCard_id()}">
+                         <div class = "card">
+                             <img src="/img/img.jpeg" width="200px" height="200px">
+                             <div class="info">
+                                 <div class="grade" >Полное имя: <div th:text="${card.getFull_name()}"></div></div>
+                                 <div class="grade">Зар.плата: <div th:text="${card.getSalary()}"></div></div>
+                                 <div class="grade" >Дата рождения: <div th:text="${card.getDob()}"></div></div>
+                                 <div class="grade" >Стаж игры: <div th:text="${card.getPlay_exp()}"></div></div>
+                                 <div class="grade" >Команда: <div th:text="${card.getTeam()}"></div></div>
+                                 <div class="grade buttons">
+                                     <button class="button red" type="submit">Удалить</button>
+                                 </div>
 
+                             </div>
                          </div>
-                     </div>
+                     </form>
                  </div>
                 <div class="grade buttons">
+                    <a class="button" th:href="@{/teams/add-cards/{team_id} (team_id = ${team.getTeam_id()})}">Добавить игроков</a>
                     <a class="button" th:href="@{/teams/edit/{team_id} (team_id =${team.team_id})}">Редактировать</a>
                     <a class="button red" th:href="@{/teams/delete/{team_id} (team_id =${team.team_id})}">Удалить</a>
                 </div>
             </div>
-        </form>
+        </div>
         </div>
     </div>
 </main>
