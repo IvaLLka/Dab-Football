@@ -54,7 +54,6 @@ public class CardRepository implements CardRepositoryI {
     }
 
     @Async
-    @Override
     public void deleteCard(Integer card_id){
         List<Card> cards = getCards();
         cards.removeIf(team -> Objects.equals(team.getCard_id(), card_id));
@@ -65,7 +64,6 @@ public class CardRepository implements CardRepositoryI {
         }
     }
     @Async
-    @Override
     public void update(Card card) {
         List<Card> cards = getCards();
         for (int i = 0; i < cards.size(); i++) {
@@ -82,7 +80,6 @@ public class CardRepository implements CardRepositoryI {
     }
 
     @Async
-    @Override
     public void createCard(Card card){
         try{
             List<Card> cards = objectMapper.readValue(new File(fileP), new TypeReference<>() {
@@ -99,7 +96,6 @@ public class CardRepository implements CardRepositoryI {
     }
 
     @Async
-    @Override
     public List<Card> getCards ()  {
         try{
             return objectMapper.readValue(new File(fileP), new TypeReference<>() {
@@ -110,6 +106,7 @@ public class CardRepository implements CardRepositoryI {
         }
     }
 
+    @Async
     public Card findCardById(Integer card_id){
         List<Card> cardList = getCards();
         for(Card card: cardList){

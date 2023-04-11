@@ -3,6 +3,7 @@ package com.ex.fottball.Services;
 import com.ex.fottball.Entities.Card;
 import com.ex.fottball.Entities.Team;
 import com.ex.fottball.Repository.TeamRepositoryI;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import com.ex.fottball.Repository.CardRepositoryI;
 
@@ -24,29 +25,34 @@ public class TeamService {
         teamRepository.addTeam(team);
     }*/
 
+    @Async
     public void createTeam(Team team) {
         teamRepository.createTeam(team);
     }
 
+    @Async
     public  List<Team> getTeams() {
         List<Team> teamList = teamRepository.getTeams();
         return teamList;
     }
 
+    @Async
     public void deleteTeam(Integer team_id){
         teamRepository.deleteTeam(team_id);
     }
 
+    @Async
     public Team findTeamById(Integer team_id) throws IOException{
         return teamRepository.findTeamById(team_id);
     }
 
+    @Async
     public Team update(Team team){
         teamRepository.update(team);
         return teamRepository.findTeamById(team.getTeam_id());
     }
 
-
+    @Async
     public List<Card> getCardsInTeam(Integer team_id)throws IOException{
         Team team = findTeamById(team_id);
         List<Card> cards = new ArrayList<>();
