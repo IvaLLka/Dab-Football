@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <meta charset="UTF-8">
+    <title>Create-team</title>
+</head>
+<body>
+    <div class="head">
+        <div class="container">
+            <div class="header-body">
+                <div class="logo">Dab Football</div>
+                <div class="links">
+                    <div class="head-element"><a class="link" th:href="@{index}">Главная</a></div>
+                    <div class="head-element"><a class="link" th:href="@{cards}">Игроки</a></div>
+                    <div class="head-element"><a class="link" th:href="@{teams}">Команды</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <form method="post" action="/cards/form" class="modal">
+            <div class="modal-cont">
+                <div class="modal-window">
+                    <div class="item">Создание карточки</div>
+                    <input class="input" type="text"  name="full_name" placeholder="Введите ФИО">
+                    <input class="input" type="number" name="salary" placeholder="Введите зар.плату">
+                    <input class="input" type="number" name="play_exp" placeholder="Введите стаж игры">
+                    <input class="input" type="text" name="team" placeholder="Введите команду">
+                    <input class="input" type="date" name="dob" placeholder="Введите дату рождения">
+
+
+                    <!-- <input  type="file" size="20px"accept="image/x-png">-->
+                    <button class="submit" type="submit">Cоздать карточку</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>

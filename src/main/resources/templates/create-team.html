@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <meta charset="UTF-8">
+    <title>Create-team</title>
+</head>
+<body>
+    <header class="head">
+        <div class="container">
+            <div class="header-body">
+                <div class="logo">Dab Football</div>
+                <div class="links">
+                    <div class="head-element"><a class="link" th:href="@{index}">Главная</a></div>
+                    <div class="head-element"><a class="link" th:href="@{cards}">Игроки</a></div>
+                    <div class="head-element"><a class="link" th:href="@{teams}">Команды</a></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main  class="container" >
+        <form method="post" action="/teams/form" class="modal"  >
+            <div class="modal-cont">
+                <div class="modal-window">
+                    <div class="item" >Создание команды</div>
+                    <input class="input" type="text" name="team_name" placeholder="Введите название команды">
+                    <input class="input" type="text" name="trainer" placeholder="Введите тренера">
+                    <input class="input" type="date" name="team_dob" placeholder="Введите дату основания">
+                    <input class="input" type="number" name="num_players" placeholder="Введите количество игроков">
+                    <input class="input" type="text" name="stadium" placeholder="Введите стадион">
+                    <!--<input class="input" type="number" name="cards" placeholder="Введите id игрока">-->
+                   <!-- <select class="input" name="cards" multiple>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>-->
+                    <select class="input" name="cards" multiple>
+                        <option>Выберите игрока</option>
+                        <option th:each="card:${cards}" th:text="${card.getCard_id()}"></option>
+                    </select>
+
+
+                  <!--  <input  type="file" size="20px"accept="image/x-png">-->
+                    <button class="submit" type="submit">Cоздать</button>
+                </div>
+            </div>
+        </form>
+    </main>
+    
+
+</body>
+</html>

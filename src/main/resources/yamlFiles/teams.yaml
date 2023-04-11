@@ -1,0 +1,20 @@
+---
+- team_id: 1
+  team_name: "LK"
+  trainer: "34"
+  team_dob: "0434-03-31"
+  num_players: 34
+  stadium: "st"
+  card: null
+  cards: null
+- team_id: 2
+  team_name: "56"
+  trainer: "565"
+  team_dob: "0656-05-06"
+  num_players: 56
+  stadium: "56"
+  card: null
+  cards:
+  - 2
+  - 3
+  - 4

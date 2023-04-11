@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"href="../../css/style.css">
+    <meta charset="UTF-8">
+    <title>Create-team</title>
+</head>
+<body>
+<header class="head">
+    <div class="container">
+        <div class="header-body">
+            <div class="logo">Dab Football</div>
+            <div class="links">
+                <div class="head-element"><a class="link" href="/index">Главная</a></div>
+                <div class="head-element"><a class="link" href="/cards">Игроки</a></div>
+                <div class="head-element"><a class="link" href="/teams">Команды</a></div>
+            </div>
+        </div>
+    </div>
+</header>
+<main class="container">
+
+    <form method="post" th:action="'/teams/edit/'+${team.getTeam_id}" class="modal" th:each="team:${teams}" >
+        <div class="modal-cont">
+            <div class="modal-window">
+                <div class="item">Редактировать команду</div>
+                <span>Название</span>
+                <input class="input" th:value="${team.getTeam_name()}" type="text" name="team_name">
+                <span>Тренер</span>
+                <input class="input" th:value="${team.getTrainer()}" type="text" name="trainer">
+                <span>Дата основания</span>
+                <input class="input" th:value="${team.getTeam_dob()}" type="date" name="team_dob">
+                <span>Кол во игроков</span>
+                <input class="input" th:value="${team.getNum_players()}" type="number" name="num_players">
+                <span>Стадион</span>
+                <input class="input" th:value="${team.getStadium()}" type="text" name="stadium">
+
+
+                <!--  <input  type="file" size="20px"accept="image/x-png">-->
+                <button class="submit" type="submit">Редактировать</button>
+                <button class="submit"><a href="/teams"> Отменить</a></button>
+            </div>
+        </div>
+    </form>
+
+</main>
+
+
+</body>
+</html>

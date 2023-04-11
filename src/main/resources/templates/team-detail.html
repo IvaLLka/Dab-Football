@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teams</title>
+</head>
+<body>
+<header class="head">
+    <div class="container">
+        <div class="header-body">
+            <div class="logo">Dab Football</div>
+            <div class="links">
+                <div class="head-element"><a class="link" href="/index">Главная</a></div>
+                <div class="head-element"><a class="link" href="/cards">Игроки</a></div>
+            </div>
+        </div>
+    </div>
+</header>
+<main class="container" th:each="team:${teams}">
+    <div class="players" >
+        <div class="main-title">Команда  <div th:text="${team.getTeam_name()}"></div>
+        <form method="post" th:action="'/teams/details/'+${team.getTeam_id}" class="card"  >
+            <img src="/img/img.jpeg" width="200px" height="200px">
+            <div class="info">
+                <div class="grade" >Название: <div th:text="${team.getTeam_name()}"></div></div>
+                <div class="grade">Тренер: <div th:text="${team.getTrainer()}"></div>  </div>
+                <div class="grade">Колличетсво игроков: <div th:text="${team.getNum_players()}"></div> </div>
+                <div class="grade">Стадион: <div th:text="${team.getStadium()}"></div> </div>
+                <div class="grade">Дата основания: <div th:text="${team.getTeam_dob()}"></div></div>
+                 Игроки:
+                 <div th:each="card:${cards}">
+                     <div class = "card">
+                         <img src="/img/img.jpeg" width="200px" height="200px">
+                         <div class="info">
+                             <div class="grade" >Полное имя: <div th:text="${card.getFull_name()}"></div></div>
+                             <div class="grade">Зар.плата: <div th:text="${card.getSalary()}"></div></div>
+                             <div class="grade" >Дата рождения: <div th:text="${card.getDob()}"></div></div>
+                             <div class="grade" >Стаж игры: <div th:text="${card.getPlay_exp()}"></div></div>
+                             <div class="grade" >Команда: <div th:text="${card.getTeam()}"></div></div>
+                             <div class="grade buttons">
+                                 <a class="button red" th:href="@{/teams/del-cardFromTeam/{card_id} (card_id =${team.card})}">Удалить</a>
+                             </div>
+
+                         </div>
+                     </div>
+                 </div>
+                <div class="grade buttons">
+                    <a class="button" th:href="@{/teams/edit/{team_id} (team_id =${team.team_id})}">Редактировать</a>
+                    <a class="button red" th:href="@{/teams/delete/{team_id} (team_id =${team.team_id})}">Удалить</a>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>
