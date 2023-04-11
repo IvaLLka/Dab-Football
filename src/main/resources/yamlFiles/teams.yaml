@@ -18,3 +18,15 @@
   - 2
   - 3
   - 4
+- team_id: 4
+  team_name: "43"
+  trainer: "234"
+  team_dob: "0012-03-12"
+  num_players: 32143
+  stadium: "1234"
+  card: null
+  cards:
+  - 1
+  - 3
+  - 4
+  - 5

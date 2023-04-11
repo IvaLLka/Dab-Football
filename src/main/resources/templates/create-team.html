@@ -11,17 +11,16 @@
     <header class="head">
         <div class="container">
             <div class="header-body">
-                <div class="logo">Dab Football</div>
+                <div class="logo"><a class="link" href="/index">Dab Football</a></div>
                 <div class="links">
-                    <div class="head-element"><a class="link" th:href="@{index}">Главная</a></div>
-                    <div class="head-element"><a class="link" th:href="@{cards}">Игроки</a></div>
-                    <div class="head-element"><a class="link" th:href="@{teams}">Команды</a></div>
+                    <div class="head-element"><a class="link" href="/cards">Игроки</a></div>
+                    <div class="head-element"><a class="link" href="/teams">Команды</a></div>
                 </div>
             </div>
         </div>
     </header>
     <main  class="container" >
-        <form method="post" action="/teams/form" class="modal"  >
+        <form method="post" action="/teams/form" class="modal" >
             <div class="modal-cont">
                 <div class="modal-window">
                     <div class="item" >Создание команды</div>
@@ -32,7 +31,7 @@
                     <input class="input" type="text" name="stadium" placeholder="Введите стадион">
                     <!--<input class="input" type="number" name="cards" placeholder="Введите id игрока">-->
                    <!-- <select class="input" name="cards" multiple>
-                        <option value="1">1</option>ываимк
+                        <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                     </select>-->

@@ -151,20 +151,6 @@ public class TeamRepository implements TeamRepositoryI{
         }
     }
 
-    /*public List<Card> getCards(List<Card> allCards) {
-        List<Card> teamCards = new ArrayList<>();
-        for (Integer cardId : this.cards) {
-            for (Card card : allCards) {
-                if (card.getCard_id().equals(cardId)) {
-                    teamCards.add(card);
-                    break; // add break statement after card is found to avoid unnecessary iterations
-                }
-            }
-        }
-        return teamCards;
-    }*/
-
-
 
 
     @Async

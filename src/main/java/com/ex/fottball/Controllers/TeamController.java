@@ -107,7 +107,7 @@ public class TeamController {
     @GetMapping("/teams/details/{team_id}")
     public String teamDetail(@PathVariable Integer team_id, Model model)throws IOException{
         List<Team> teamList = new ArrayList<>();
-        List<Card> cardList = cardService.getAllCards();
+        List<Card> cardList = teamService.getCardsInTeam(team_id);
         teamList.add(teamService.findTeamById(team_id));
         model.addAttribute("teams", teamList);
         model.addAttribute("cards", cardList);

@@ -3,21 +3,20 @@ package com.ex.fottball.Services;
 import com.ex.fottball.Entities.Card;
 import com.ex.fottball.Entities.Team;
 import com.ex.fottball.Repository.TeamRepositoryI;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ex.fottball.Repository.CardRepositoryI;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class TeamService {
+    private final CardRepositoryI cardRepository;
     private final TeamRepositoryI teamRepository;
 
-    public TeamService(TeamRepositoryI teamRepository) {
+    public TeamService(CardRepositoryI cardRepository, TeamRepositoryI teamRepository) {
+        this.cardRepository = cardRepository;
         this.teamRepository = teamRepository;
     }
 
@@ -45,6 +44,18 @@ public class TeamService {
     public Team update(Team team){
         teamRepository.update(team);
         return teamRepository.findTeamById(team.getTeam_id());
+    }
+
+
+    public List<Card> getCardsInTeam(Integer team_id)throws IOException{
+        Team team = findTeamById(team_id);
+        List<Card> cards = new ArrayList<>();
+        List<Integer> card_id = team.getCards();
+
+        for(int i=0; i<card_id.size(); i++){
+            cards.add(cardRepository.findCardById(card_id.get(i)));
+        }
+        return cards;
     }
 
 
