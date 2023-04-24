@@ -2,6 +2,7 @@ package com.ex.fottball.Repository;
 
 import com.ex.fottball.Entities.Card;
 import com.ex.fottball.Entities.Team;
+import com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +18,7 @@ public interface TeamRepositoryI {
 
     public List<Team> getTeams() ;
     public void createTeam(Team team) ;
-    public void deleteCardFromTeam(Integer team_id, Integer card_id)throws IOException;
+    public void deleteCardFromTeam(Integer team_id, Integer card_id);
+    public void addCardToTeam(Integer card_id, List<Integer> cards);
 
 }

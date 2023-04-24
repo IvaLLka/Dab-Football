@@ -66,9 +66,14 @@ public class TeamService {
     }
 
    @Async
-    public void deleteCardFromTeam(Integer team_id, Integer card_id)throws IOException{
+    public void deleteCardFromTeam(Integer team_id, Integer card_id){
         teamRepository.deleteCardFromTeam(team_id, card_id);
    }
+
+    @Async
+    public void addCardToTeam(Integer team_id, List<Integer> cards){
+        teamRepository.addCardToTeam(team_id, cards);
+    }
 
 
 

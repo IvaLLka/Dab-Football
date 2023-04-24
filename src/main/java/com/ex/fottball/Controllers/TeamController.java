@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -76,6 +77,7 @@ public class TeamController {
         return "redirect:/teams";
     }
 
+    @Async
     @PostMapping("/teams/delete-card/{team_id}/{card_id}")
     public String deleteCardFromTeam(@PathVariable Integer team_id, @PathVariable Integer card_id)throws IOException{
         teamService.deleteCardFromTeam(team_id, card_id);
@@ -93,12 +95,17 @@ public class TeamController {
     }
 
     @GetMapping("/teams/add-cards/{team_id}")
-    public String addCard(@PathVariable Integer team_id, Model model){
-        List<Card> cards = new ArrayList<>();
-        List<Card> teams = new ArrayList<>();
+    public String addCard(@PathVariable Integer team_id, Model model) throws IOException {
+        List<Card> cards = cardService.getAllCards();
+        Team teams = teamService.findTeamById(team_id);
         model.addAttribute("cards", cards);
         model.addAttribute("teams", teams);
-        return "/add-cards";
+        return "add-cards";
+    }
+    @PostMapping("/teams/add-cards/{team_id}")
+    public String addCardInTeam(@PathVariable Integer team_id, @RequestParam(name = "cards") List<Integer> cards){
+        teamService.addCardToTeam(team_id, cards);
+        return "redirect:/teams/details/{team_id}";
     }
 
 

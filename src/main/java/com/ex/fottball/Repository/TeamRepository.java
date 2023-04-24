@@ -9,6 +9,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -69,15 +70,7 @@ public class TeamRepository implements TeamRepositoryI{
         }
     }
 
-    @Async
-    public void addCardToTeam(Integer card_id, Integer team_id)throws IOException{
-        List<Team> teams = objectMapper.readValue(new File(fileP), new TypeReference<>() {
-        });
 
-        // Чтение файла cards.yaml
-        List<Card> cards = objectMapper.readValue(new File(filePathToCards), new TypeReference<>() {
-        });
-    }
 
 
     @Async
@@ -120,7 +113,7 @@ public class TeamRepository implements TeamRepositoryI{
     }
 
     @Async
-    public void deleteCardFromTeam(Integer team_id, Integer card_id)throws IOException{
+    public void deleteCardFromTeam(Integer team_id, Integer card_id){
         Team team = findTeamById(team_id);
         List<Integer> cardId = team.getCards();
         for( int i=0; i<cardId.size(); i++){
@@ -129,6 +122,41 @@ public class TeamRepository implements TeamRepositoryI{
             }
         }
         team.setCards(cardId);
+        update(team);
+    }
+
+    @Async
+    public void addCardToTeam(Integer team_id, List<Integer> cards){
+        Team team = findTeamById(team_id);
+        List<Integer> card_IDs = new ArrayList<>();
+        List <Card> cardList = cardRepository.getCards();
+        for( int j=0; j<cardList.size(); j++) {
+            Integer card = cardList.get(j).getCard_id();
+            card_IDs.add(card);
+        }
+        List <Integer> team_card_id = team.getCards();
+        /*for (int i = 0; i < team_card_id.size(); i++) {
+            for (int j = 0; j < cards.size(); j++) {
+                if (team_card_id.get(i) == cards.get(j)) {
+                    for( int k=0; k<card_IDs.size(); k++) {
+                        if ( team_card_id.get(i) == card_IDs.get(k)) {
+                            card_IDs.remove(k+1);
+                        }
+                    }
+                }
+            }
+        }*/
+
+
+        for( int i=0; i<card_IDs.size(); i++){
+            for( int j=0; j<cards.size(); j++) {
+                if(card_IDs.get(i) == cards.get(j)) {
+                    team_card_id.add(i+1);
+                }
+            }
+        }
+
+        team.setCards(team_card_id);
         update(team);
     }
 
